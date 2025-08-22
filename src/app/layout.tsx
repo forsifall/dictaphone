@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import "../../styles/globals.css";
+import "../styles/_globals.scss";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 const nunito = Nunito({

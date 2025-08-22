@@ -1,10 +1,15 @@
+
+@use "mixin" as *;
+
 .dictaphone-size {
     width: 100px;
     height: 100px;
+    border: 1px solid black;
 }
 
 .dictaphone-section {
     @extend .dictaphone-size;
+    @include flex-center;
     border-radius: 50%;
-    border: 1px solid black;
+    cursor: pointer;
 }
