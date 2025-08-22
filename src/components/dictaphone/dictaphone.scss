@@ -1,15 +1,49 @@
-
 @use "mixin" as *;
+@use "variables" as *;
 
 .dictaphone-size {
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+.dictaphone-shadow {
+  -webkit-box-shadow: 1px 9px 44px 6px rgba(34, 60, 80, 0.54);
+  -moz-box-shadow: 1px 9px 44px 6px rgba(34, 60, 80, 0.54);
+  box-shadow: 1px 9px 44px 6px rgba(34, 60, 80, 0.54);
 }
 
 .dictaphone-section {
-    @extend .dictaphone-size;
-    @include flex-center;
-    border-radius: 50%;
-    cursor: pointer;
+  @extend .dictaphone-size;
+  @extend .dictaphone-shadow;
+  @include flex-center;
+  border-radius: 50%;
+  background-color: $accent-purple;
+  cursor: pointer;
+}
+
+.dictaphone-animation--up {
+  position: relative;
+  @keyframes up {
+    from {
+      transform: translateY(0);
+    } to {
+      transform: translateY(-200);
+    }
+  }
+  animation-name: up;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+.dictaphone-animation--down {
+  position: relative;
+  @keyframes down {
+    from {
+      transform: translateY(-200);
+    } to {
+      transform: translateY(0);
+    }
+  }
+  animation-name: down;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
