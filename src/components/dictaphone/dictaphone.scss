@@ -1,0 +1,10 @@
+.dictaphone-size {
+    width: 100px;
+    height: 100px;
+}
+
+.dictaphone-section {
+    @extend .dictaphone-size;
+    border-radius: 50%;
+    border: 1px solid black;
+}

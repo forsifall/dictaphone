@@ -1,0 +1,26 @@
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: linear-gradient(to right, rgb(211, 204, 227), rgb(233, 228, 240));
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.main-header {
+  height: 10%;
+}
+.main-footer {
+  height: 10%;
+}
