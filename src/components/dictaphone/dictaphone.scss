@@ -19,6 +19,16 @@
   border-radius: 50%;
   background-color: $accent-purple;
   cursor: pointer;
+  position: relative;
+
+  & .dictaphone-bg {
+    width: 100px;
+    height: 100px;
+    transition: transform 0.1s;
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.24);
+    border-radius: 50%;
+  }
 }
 
 .dictaphone-animation--up {

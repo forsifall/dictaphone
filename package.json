@@ -9,10 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
     "bootstrap": "^5.3.7",
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-redux": "^9.2.0",
     "sass": "^1.90.0"
   },
   "devDependencies": {
