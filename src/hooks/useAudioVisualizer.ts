@@ -1,17 +1,20 @@
-import { StoreType } from "@/store";
+import { DispatchType, StoreType } from "@/store";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Animation } from "@/components/dictaphone/types/dictaphone.type";
+import { toggleIsSpeak } from "@/store/slices/dictaphone";
 
 export function useAudioVisualizer() {
   const [scale, setScale] = useState(1);
   const dictaphone = useSelector((state: StoreType) => state.dictaphone);
+  const dispatch = useDispatch<DispatchType>();
 
   const audioRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
 
   useEffect(() => {
     let rafId: number;
+    let timer: ReturnType<typeof setTimeout>;
 
     (async () => {
       audioRef.current = new AudioContext();
@@ -33,9 +36,13 @@ export function useAudioVisualizer() {
         const maxScale = 5;
 
         if (amplitude > 1) {
+          clearTimeout(timer);
           let newScale = 1 + (amplitude / 128) * SCALE_FACTOR;
           if (newScale < 1.2) newScale = 1.2;
           setScale(Math.min(newScale, maxScale));
+          timer = setTimeout(() => {
+            dispatch(toggleIsSpeak());
+          },1500)
         } else {
           setScale(1);
         }

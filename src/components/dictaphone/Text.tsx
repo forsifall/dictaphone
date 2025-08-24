@@ -16,7 +16,7 @@ export default function Text() {
           : "d-block dictaphone__text-section--show"
       }`}
     >
-      <p>SOME TEXT</p>
+      <p>{dictaphone.endSpeak ? "Поиск..." : "Говорите..."}</p>
     </section>
   );
 }
