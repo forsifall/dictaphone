@@ -16,7 +16,8 @@ export function useMediaRecord(stream: MediaStream) {
     const formData = new FormData();
     formData.append("audio", blobAudio, "recording.wav");
 
-    axios.post("/api/chatGPT/trancription", formData).then((response) => {
+    try {
+        axios.post("/api/chatGPT/trancription", formData).then((response) => {
       if (response.data.text) {
         console.log(response.data.text);
       } else {
@@ -24,6 +25,9 @@ export function useMediaRecord(stream: MediaStream) {
       }
     });
 
+    } catch(e) {
+        console.log(e)
+    }
     audioChunks = [];
 
     console.log("фетчу апи роутс");
