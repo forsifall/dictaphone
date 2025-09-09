@@ -1,4 +1,5 @@
-import Dictaphone from "@/components/dictaphone/Dictaphone";
+
+import Dictaphone from "@/components/dictaphone/dictaphone";
 import "./page.scss";
 import Text from "@/components/dictaphone/Text";
 import ReduxProvider from "@/store/ReduxProvider";
