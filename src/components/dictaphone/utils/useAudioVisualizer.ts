@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Animation } from "@/components/dictaphone/types/dictaphone.type";
 import { toggleIsSpeak } from "@/store/slices/dictaphone";
+import { useMediaRecord } from "./useMediaRecord";
 
 export function useAudioVisualizer() {
   const [scale, setScale] = useState(1);
@@ -24,6 +25,8 @@ export function useAudioVisualizer() {
       const source = audioRef.current.createMediaStreamSource(stream);
       source.connect(analyserRef.current);
 
+      const {mediaRecorder} = useMediaRecord(stream);
+
       const dataArray:Uint8Array<ArrayBuffer> = new Uint8Array(analyserRef.current.frequencyBinCount);
 
       function tick() {  
@@ -37,11 +40,16 @@ export function useAudioVisualizer() {
 
         if (amplitude > 1) {
           clearTimeout(timer);
+          dispatch(toggleIsSpeak({type: "unspeak"}));
+          if(mediaRecorder.state === "inactive") {
+            mediaRecorder.start();
+          }
           let newScale = 1 + (amplitude / 128) * SCALE_FACTOR;
           if (newScale < 1.2) newScale = 1.2;
           setScale(Math.min(newScale, maxScale));
           timer = setTimeout(() => {
-            dispatch(toggleIsSpeak());
+              mediaRecorder.stop();
+            dispatch(toggleIsSpeak({type: "speak"}));
           },1500)
         } else {
           setScale(1);
