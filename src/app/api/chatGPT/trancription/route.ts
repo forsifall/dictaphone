@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { OpenAI } from "openai/client.js";
+import OpenAI from "openai";
 
 console.log("API route вообще вызван?");
 
@@ -18,13 +18,18 @@ export async function POST(req: Request) {
     });
   }
 
+  const arrayBuffer = await audioBlob.arrayBuffer();
+const buffer = Buffer.from(arrayBuffer);
+
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
 
+  const file = new File([buffer], "recording.wav", { type: "audio/wav" });
+
   try {
     const trancription = await openai.audio.transcriptions.create({
-      file: audioBlob,
+      file: file,
       model: "whisper-1",
     });
     return NextResponse.json({ text: trancription.text });
