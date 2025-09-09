@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
 export async function POST(req: Request) {
-  console.log("API route вызван!");
   const formData = await req.formData();
   const audioBlob = formData.get("audio") as Blob;
 

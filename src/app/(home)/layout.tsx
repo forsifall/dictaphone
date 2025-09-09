@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang="en">
       <body className={`${nunito.className}`}>
         <header className="main-header">
-          <h1>Диктоdфон</h1>
+          <h1>Диктофон</h1>
         </header>
         {children}
         <footer className="main-footer"></footer>

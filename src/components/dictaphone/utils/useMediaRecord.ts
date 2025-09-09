@@ -16,13 +16,25 @@ export function useMediaRecord(stream: MediaStream) {
     const formData = new FormData();
     formData.append("audio", blobAudio, "recording.wav");
 
-    axios.post("/api/chatGPT/trancription", formData)
-    .then((response) => {
-      if (response.data.text) {
-        return response.data.text
-      }
-    })
-    .then((response) => console.log(`окончательный ответ ${response}`))
+    axios
+      .post("/api/chatGPT/trancription", formData)
+      .then((response) => {
+        if (response.data.text) {
+          return response.data.text;
+        }
+      })
+      .then((response) => {
+        console.log(`окончательный ответ: ${response}`);
+
+        axios
+          .post("/api/chatGPT/response", response)
+          .then((chatGPTresponse) => {
+            console.log(`chatGPT: ${chatGPTresponse}`);
+          })
+          .catch((e) =>
+            console.log(`поймал ошибку при получении ответа от чат гпт: ${e}`)
+          );
+      });
 
     audioChunks = [];
   };
