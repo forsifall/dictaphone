@@ -1,4 +1,4 @@
-import { useAudioVisualizer } from "@/hooks/useAudioVisualizer";
+import { useAudioVisualizer } from "@/components/dictaphone/utils/useAudioVisualizer";
 
 export default function DictaphoneBG() {
   const {scale} = useAudioVisualizer()

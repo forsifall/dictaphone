@@ -1,30 +1,28 @@
 "use client";
 
-import "./dictaphone.scss";
+import "./styles/dictaphone.scss";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { DispatchType, StoreType } from "@/store";
-import { toggleDICPos } from "@/store/slices/dictaphone";
 import DictaphoneBG from "./DictaphoneBG";
-
-let animationIs: boolean = false;
+import { useDictaphoneHandler } from "./utils/dictaphoneHandler";
 
 export default function Dictaphone() {
-  const dispatch = useDispatch<DispatchType>();
-  const dictaphone = useSelector((state: StoreType) => state.dictaphone);
-
-  const handlerClick = () => {
-    if (animationIs) return;
-    dispatch(toggleDICPos());
-  };
+  const {
+    dispatch,
+    dictaphone,
+    dictaphoneSection,
+    animationIs,
+    setAnimationIs,
+    handlerClick,
+  } = useDictaphoneHandler();
 
   return (
     <>
       <div
         onClick={handlerClick}
-        onAnimationStart={() => (animationIs = true)}
-        onAnimationEnd={() => (animationIs = false)}
+        onAnimationStart={() => setAnimationIs(true)}
+        onAnimationEnd={() => setAnimationIs(false)}
         className={`dictaphone-section ${dictaphone.animationDictaphonePos}`}
+        ref={dictaphoneSection}
       >
         <DictaphoneBG />
         <Image alt="microphone" src="/microphone.svg" width={50} height={50} />

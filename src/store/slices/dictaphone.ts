@@ -3,7 +3,7 @@ import type {InitialState} from "../types/dictaphone.type";
 import { Animation } from "@/components/dictaphone/types/dictaphone.type";
 
 const initialState: InitialState = {
-    animationDictaphonePos: Animation.Up,
+    animationDictaphonePos: "null",
     endSpeak: false,
     
 }
@@ -13,9 +13,13 @@ const dictaphoneSlice = createSlice({
     initialState: initialState,
     reducers: {
         toggleDICPos(state) {
-            state.animationDictaphonePos === Animation.Down || null 
+            if(state.animationDictaphonePos === "null") state.animationDictaphonePos = Animation.Down;
+            state.animationDictaphonePos === Animation.Down 
             ? state.animationDictaphonePos = Animation.Up 
             : state.animationDictaphonePos = Animation.Down;
+            console.log(state.animationDictaphonePos)
+
+            state.endSpeak = false;
         },
         toggleIsSpeak(state) {
             state.endSpeak = !state.endSpeak;

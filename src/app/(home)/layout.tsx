@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import "../styles/_globals.scss";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../../styles/_globals.scss";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 const nunito = Nunito({
   variable: "--font-geist-sans",
@@ -22,7 +22,9 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body className={`${nunito.className}`}>
-        <header className="main-header"></header>
+        <header className="main-header">
+          <h1>Диктофон</h1>
+        </header>
         {children}
         <footer className="main-footer"></footer>
       </body>
