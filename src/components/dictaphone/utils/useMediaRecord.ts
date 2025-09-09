@@ -20,7 +20,7 @@ export function useMediaRecord(stream: MediaStream) {
       if (response.data.text) {
         console.log(response.data.text);
       } else {
-        console.log(response)
+        console.log(111,response)
       }
     });
 

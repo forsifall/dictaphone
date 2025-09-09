@@ -29,7 +29,6 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ text: trancription.text });
   } catch (e) {
-    console.log(e);
     return NextResponse.json({
       error: e,
       status: 400,
