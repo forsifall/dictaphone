@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-console.log("API route вообще вызван?");
-
 export async function POST(req: Request) {
   console.log("API route вызван!");
   const formData = await req.formData();
   const audioBlob = formData.get("audio") as Blob;
-
-  console.log("FormData keys:", [...formData.keys()]);
-  console.log("AudioBlob size:", audioBlob?.size);
 
   if (!audioBlob) {
     return NextResponse.json({
@@ -27,10 +22,14 @@ export async function POST(req: Request) {
 
   const file = new File([buffer], "recording.wav", { type: "audio/wav" });
 
-  const trancription = await openai.audio.transcriptions.create({
-    file: file,
-    model: "whisper-1",
-  });
+  try {
+    const trancription = await openai.audio.transcriptions.create({
+      file: file,
+      model: "whisper-1",
+    });
 
-  return NextResponse.json({ text: trancription.text });
+    return NextResponse.json({ text: trancription.text });
+  } catch (e) {
+    return NextResponse.json({ error: "ошибка" });
+  }
 }
