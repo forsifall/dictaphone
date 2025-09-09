@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     const trancription = await openai.audio.transcriptions.create({
       file: file,
       model: "whisper-1",
+      language: "ru"
     });
 
     return NextResponse.json({ text: trancription.text });
