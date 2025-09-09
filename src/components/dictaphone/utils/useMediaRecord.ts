@@ -27,7 +27,7 @@ export function useMediaRecord(stream: MediaStream) {
         console.log(`окончательный ответ: ${response}`);
 
         axios
-          .post("/api/chatGPT/response", response)
+          .post("/api/chatGPT/response", { textRequest: response })
           .then((chatGPTresponse) => {
             console.log(`chatGPT: ${chatGPTresponse}`);
           })
