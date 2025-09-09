@@ -26,7 +26,7 @@ export function useMediaRecord(stream: MediaStream) {
     });
 
     } catch(e) {
-        console.log(e)
+        console.log(1111111,e)
     }
     audioChunks = [];
 
