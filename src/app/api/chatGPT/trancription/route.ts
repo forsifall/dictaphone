@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   }
 
   const arrayBuffer = await audioBlob.arrayBuffer();
-const buffer = Buffer.from(arrayBuffer);
+  const buffer = Buffer.from(arrayBuffer);
 
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -27,17 +27,10 @@ const buffer = Buffer.from(arrayBuffer);
 
   const file = new File([buffer], "recording.wav", { type: "audio/wav" });
 
-  try {
-    const trancription = await openai.audio.transcriptions.create({
-      file: file,
-      model: "whisper-1",
-    });
-    return NextResponse.json({ text: trancription.text });
-  } catch (e) {
-    console.log(111,e)
-    return NextResponse.json({
-      error: e,
-      status: 400,
-    });
-  }
+  const trancription = await openai.audio.transcriptions.create({
+    file: file,
+    model: "whisper-1",
+  });
+
+  return NextResponse.json({ text: trancription.text });
 }
