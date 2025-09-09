@@ -29,7 +29,7 @@ export function useMediaRecord(stream: MediaStream) {
         axios
           .post("/api/chatGPT/response", { textRequest: response })
           .then((chatGPTresponse) => {
-            console.log(`chatGPT: ${chatGPTresponse}`);
+            console.log(`chatGPT: ${chatGPTresponse.data}`);
           })
           .catch((e) =>
             console.log(`поймал ошибку при получении ответа от чат гпт: ${e}`)
