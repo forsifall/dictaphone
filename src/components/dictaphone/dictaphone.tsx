@@ -1,5 +1,5 @@
 "use client";
-
+import "../../test/testPOVTOR";
 import "./styles/dictaphone.scss";
 import Image from "next/image";
 import DictaphoneBG from "./DictaphoneBG";

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "../../styles/_globals.scss";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
 
 const nunito = Nunito({
   variable: "--font-geist-sans",
-  subsets: ["latin","cyrillic"],
+  subsets: ["latin", "cyrillic"],
   display: "swap",
 });
 
@@ -20,13 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en">
+    <html lang="en">
       <body className={`${nunito.className}`}>
         <header className="main-header">
           <h1>Диктофон</h1>
         </header>
         {children}
-        <footer className="main-footer"></footer>
+        <footer className="main-footer">
+        </footer>
       </body>
     </html>
   );

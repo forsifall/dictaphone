@@ -5,6 +5,7 @@ import { Animation } from "@/components/dictaphone/types/dictaphone.type";
 const initialState: InitialState = {
   animationDictaphonePos: "null",
   endSpeak: false,
+  response: null,
 };
 
 const dictaphoneSlice = createSlice({
@@ -21,17 +22,20 @@ const dictaphoneSlice = createSlice({
 
       state.endSpeak = false;
     },
-    toggleIsSpeak(state, action: PayloadAction<{ type: "speak" | "unspeak" }>) {
+    toggleIsSpeak(state, action: PayloadAction<{ type: "speak" | "noSpeak" }>) {
       switch (action.payload.type) {
-        case "speak":
+        case "noSpeak":
           state.endSpeak = true;
+          state.animationDictaphonePos = Animation.Down;
           break;
-        case "unspeak":
-          state.endSpeak = false;
+        case "speak":
       }
     },
+    getChatGPTResponse(state,action:PayloadAction<{text:string}>) {
+      state.response = action.payload.text;
+    }
   },
 });
 
-export const { toggleDICPos, toggleIsSpeak } = dictaphoneSlice.actions;
+export const { toggleDICPos, toggleIsSpeak, getChatGPTResponse } = dictaphoneSlice.actions;
 export default dictaphoneSlice.reducer;

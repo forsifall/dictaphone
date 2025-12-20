@@ -30,6 +30,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ text: trancription.text });
   } catch (e) {
-    return NextResponse.json({ error: "ошибка" });
+    return NextResponse.json({ error: `ошибка - ${e}` });
   }
 }
