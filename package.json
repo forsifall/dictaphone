@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "deploy": "git add . && git commit -m \"fast deploy\" && git push origin master",
     "lint": "eslint"
   },
   "dependencies": {
