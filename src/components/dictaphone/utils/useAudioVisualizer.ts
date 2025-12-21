@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Animation } from "@/components/dictaphone/types/dictaphone.type";
 import { getChatGPTResponse, toggleIsSpeak } from "@/store/slices/dictaphone";
-import { useMediaRecord } from "./useMediaRecord";
 import axios from "axios";
 
 export function useAudioVisualizer() {
