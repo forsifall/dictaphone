@@ -80,7 +80,7 @@ let mediaRecorder: MediaRecorder;
           .post("/api/chatGPT/response", { textRequest: response })
           .then((chatGPTresponse) => {
             console.log("chatGPT",chatGPTresponse.data);   
-            dispatch(getChatGPTResponse({text:  chatGPTresponse.data}))         
+            dispatch(getChatGPTResponse({text: chatGPTresponse.data.text}))         
           })
           .catch((e) =>
             console.log(`поймал ошибку при получении ответа от чат гпт: ${e} !!!!!!!!!!!!`)
