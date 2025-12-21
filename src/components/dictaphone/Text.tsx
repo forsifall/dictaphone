@@ -16,7 +16,7 @@ export default function Text() {
     <section
       className={`dictaphone__text-section ${textAnimation}`}
     >
-      <p>{dictaphone.endSpeak && !dictaphone.response ? "Поиск..." : "Говорите..."}</p>
+      <p style={dictaphone.response ? {display: "none"} : {display: ""}}>{dictaphone.endSpeak ? "Поиск..." : "Говорите..."}</p>
       {dictaphone.response && dictaphone.response}
     </section>
   );
