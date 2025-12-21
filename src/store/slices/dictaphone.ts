@@ -25,8 +25,6 @@ const dictaphoneSlice = createSlice({
     toggleIsSpeak(state, action: PayloadAction<{ type: "speak" | "noSpeak" }>) {
       switch (action.payload.type) {
         case "noSpeak":
-          state.endSpeak = true;
-          state.animationDictaphonePos = Animation.Down;
           break;
         case "speak":
       }
