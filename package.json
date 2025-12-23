@@ -10,13 +10,13 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.8.2",
+    "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
-    "next": "^16.1.0",
+    "next": "^16.1.1-canary.2",
     "openai": "^5.20.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "^0.0.0-experimental-65eec428-20251218",
+    "react-dom": "^0.0.0-experimental-65eec428-20251218",
     "react-redux": "^9.2.0",
     "sass": "^1.90.0"
   },
