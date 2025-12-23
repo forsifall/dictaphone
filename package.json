@@ -13,10 +13,10 @@
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
-    "next": "^16.1.1-canary.2",
+    "next": "^16.1.1",
     "openai": "^5.20.0",
-    "react": "^0.0.0-experimental-65eec428-20251218",
-    "react-dom": "^0.0.0-experimental-65eec428-20251218",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-redux": "^9.2.0",
     "sass": "^1.90.0"
   },
