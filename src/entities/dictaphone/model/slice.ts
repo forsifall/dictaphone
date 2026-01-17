@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { InitialState } from "../types/dictaphone.type";
-import { Animation } from "@/components/dictaphone/types/dictaphone.type";
+import type { InitialState } from "./slice.types";
+import { Animation } from "./dictaphone.type";
 
 const initialState: InitialState = {
   animationDictaphonePos: "null",
   endSpeak: null,
-  response: null,
 };
 
 const dictaphoneSlice = createSlice({
@@ -13,6 +12,7 @@ const dictaphoneSlice = createSlice({
   initialState: initialState,
   reducers: {
     toggleDICPos(state) {
+
       if (state.animationDictaphonePos === "null")
         state.animationDictaphonePos = Animation.Down;
       state.animationDictaphonePos === Animation.Down
@@ -31,11 +31,8 @@ const dictaphoneSlice = createSlice({
           state.endSpeak = false;
       }
     },
-    getChatGPTResponse(state,action:PayloadAction<{text:string | null}>) {
-      state.response = action.payload.text;
-    }
   },
 });
 
-export const { toggleDICPos, toggleIsSpeak, getChatGPTResponse } = dictaphoneSlice.actions;
+export const { toggleDICPos, toggleIsSpeak } = dictaphoneSlice.actions;
 export default dictaphoneSlice.reducer;

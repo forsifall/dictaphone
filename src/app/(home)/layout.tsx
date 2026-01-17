@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import "../../styles/_globals.scss";
+import { Nunito, Ubuntu_Sans } from "next/font/google";
+import "@/app/styles/_globals.scss";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link";
+
 
 const nunito = Nunito({
   variable: "--font-geist-sans",
   subsets: ["latin", "cyrillic"],
+  display: "swap",
+});
+
+const ubuntuSans = Ubuntu_Sans({
+  variable: "--font-ubuntuSans",
+  subsets: ["latin"],
+  weight: ["100"], // Укажите нужные веса
   display: "swap",
 });
 
@@ -22,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className}`}>
+      <body className={`${nunito.className} ${ubuntuSans.variable}`}>
         <header className="main-header">
           <h1>Диктофон</h1>
         </header>

@@ -1,5 +1,18 @@
-// В начало waveConfig добавьте:
-const waveConfig = {
+interface WaveConfig {
+  baseRadius: number;
+  amplitude: number;
+  targetAmplitude: number;
+  frequency: number;
+  phase: number;
+  rotationSpeed: number;
+  pulse: number;
+  pulseSpeed: number;
+  scaleFactor: number;
+  colorIntensity: number;
+  colorTarget: number;
+}
+
+const waveConfig: WaveConfig = {
   baseRadius: 40,
   amplitude: 0,
   targetAmplitude: 0,
@@ -9,13 +22,11 @@ const waveConfig = {
   pulse: 0,
   pulseSpeed: 0.03,
   scaleFactor: 0,
-
-  // ДОБАВЛЕНО для плавности цвета
   colorIntensity: 0,
   colorTarget: 0,
 };
 
-export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
+export function cnavasWaveUpdate(amplitude:number, micIsActive:any, ctx:CanvasRenderingContext2D, canvas:HTMLCanvasElement) {
   if (!micIsActive) {
     waveConfig.amplitude = 0;
     waveConfig.targetAmplitude = 0;
@@ -35,7 +46,6 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
   waveConfig.colorIntensity +=
     (waveConfig.colorTarget - waveConfig.colorIntensity) * 0.1; // Плавный
 
-  // 3. Центр canvas
   let centerX, centerY;
   function updateCenter() {
     centerX = canvas.width / 2;
@@ -47,19 +57,18 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
 
   waveConfig.targetAmplitude = amplitude * 10;
 
-  // Плавное изменение амплитуды (чтобы не было резких скачков)
+
   waveConfig.amplitude +=
     (waveConfig.targetAmplitude - waveConfig.amplitude) * 0.1;
 
-  // 4. Увеличиваем скорость вращения при громком звуке
+
   const currentRotationSpeed = waveConfig.rotationSpeed + amplitude * 0.03;
   waveConfig.phase += currentRotationSpeed;
 
-  // 5. Пульсация (независимо от громкости)
+
   waveConfig.pulse += waveConfig.pulseSpeed;
   const pulseFactor = 1 + 0.1 * Math.sin(waveConfig.pulse);
 
-  //РИСУЕМ ВОЛНУ
   ctx.beginPath();
 
   // Количество точек - чем больше, тем плавнее волна
@@ -83,8 +92,8 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
       waveConfig.baseRadius * pulseFactor + wave + waveConfig.amplitude;
 
     // Координаты точки
-    const x = centerX + Math.cos(angle) * radius;
-    const y = centerY + Math.sin(angle) * radius;
+    const x = centerX! + Math.cos(angle) * radius;
+    const y = centerY! + Math.sin(angle) * radius;
 
     // Рисуем линию к точке
     if (i === 0) {
@@ -99,11 +108,11 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
   // 7. ЗАЛИВКА И ОБВОДКА (настраивайте цвета)
   // Градиентная заливка
   const gradient = ctx.createRadialGradient(
-    centerX,
-    centerY,
+    centerX!,
+    centerY!,
     waveConfig.baseRadius * 0.3,
-    centerX,
-    centerY,
+    centerX!,
+    centerY!,
     waveConfig.baseRadius + waveConfig.amplitude * 1.5
   );
 
@@ -185,11 +194,11 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
   // ИСПРАВЛЕНО: Постоянное, но очень слабое свечение в состоянии покоя
   // Убрали условие if (colorIntensity > 0.2) и сделали свечение всегда, но с минимальной прозрачностью
   const glowGradient = ctx.createRadialGradient(
-    centerX,
-    centerY,
+    centerX!,
+    centerY!,
     waveConfig.baseRadius * 0.1,
-    centerX,
-    centerY,
+    centerX!,
+    centerY!,
     waveConfig.baseRadius * 0.7
   );
 
@@ -206,7 +215,7 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
   glowGradient.addColorStop(1, "hsla(210, 50%, 65%, 0)");
 
   ctx.beginPath();
-  ctx.arc(centerX, centerY, waveConfig.baseRadius * 0.7, 0, Math.PI * 2);
+  ctx.arc(centerX!, centerY!, waveConfig.baseRadius * 0.7, 0, Math.PI * 2);
   ctx.fillStyle = glowGradient;
   ctx.fill();
 
@@ -216,11 +225,11 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
     const outerGlowAlpha = (colorIntensity - 0.3) * 0.3; // Плавное появление от 0.3
 
     const outerGlowGradient = ctx.createRadialGradient(
-      centerX,
-      centerY,
+      centerX!,
+      centerY!,
       waveConfig.baseRadius + waveConfig.amplitude * 0.5,
-      centerX,
-      centerY,
+      centerX!,
+      centerY!,
       waveConfig.baseRadius + waveConfig.amplitude * 2
     );
 
@@ -236,8 +245,8 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
 
     ctx.beginPath();
     ctx.arc(
-      centerX,
-      centerY,
+      centerX!,
+      centerY!,
       waveConfig.baseRadius + waveConfig.amplitude * 2,
       0,
       Math.PI * 2
@@ -248,8 +257,8 @@ export function cnavasWaveUpdate(amplitude, micIsActive, ctx, canvas) {
 }
 
 export function canvasIsError() {
-    const canvas = document.getElementById("waveCanvas");
-    const ctx = canvas.getContext("2d")
+    const canvas:HTMLCanvasElement = document.getElementById("waveCanvas") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d");
 
   if (ctx && canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);

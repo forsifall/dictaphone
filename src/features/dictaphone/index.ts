@@ -1,0 +1,1 @@
+export {useAudioVisualizer} from "./useAudioVisualizer";

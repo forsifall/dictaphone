@@ -1,8 +1,8 @@
 
-import Dictaphone from "@/components/dictaphone/dictaphone";
+import Dictaphone from "@/widgets/dictaphone/dictaphone";
 import "./page.scss";
-import Text from "@/components/dictaphone/Text";
-import ReduxProvider from "@/store/ReduxProvider";
+import Text from "@/entities/textResponse/Text";
+import ReduxProvider from "../store/ReduxProvider";
 import { Metadata } from "next";
 
 export const metadata:Metadata = {

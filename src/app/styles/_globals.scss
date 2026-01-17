@@ -12,6 +12,10 @@ body {
   min-height: 100vh
 }
 
+:root {
+  --font-ubuntuSans: var(--font-ubuntuSans);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

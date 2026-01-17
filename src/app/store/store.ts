@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dictaphone from "./slices/dictaphone"
+import dictaphone from "../../entities/dictaphone/model/slice"
+import textResponse from "../../entities/textResponse/model/slice";
 
 const store = configureStore({
     reducer: {
-        dictaphone
+        dictaphone,
+        textResponse
     }
 })
 

@@ -7,7 +7,9 @@
     transform: translate(-50%, -50%);
 
     & p {
-        font-size: 25px;
+        font-family: var(--font-ubuntuSans);
+        font-weight: 400;
+        font-size: 50px;
     }
 
     @keyframes show {
