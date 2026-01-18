@@ -6,12 +6,13 @@ import { Animation } from "@/entities/dictaphone/index";
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { updateText } from "@/entities/textResponse/model/slice";
 import { TextResponse } from "./model/type";
-import {animate} from "./lib/speakTextAnimation";
+import { animate } from "./lib/speakTextAnimation";
+import { animateSearch } from "./lib/searchAnimation";
 
 export default function Text() {
   const dispatch = useDispatch<DispatchType>();
 
-    const spansRef = useRef<Array<HTMLSpanElement | null>>([]);
+  const spansRef = useRef<Array<HTMLSpanElement | null>>([]);
   const [totalTextWidth, setTotalTextWidth] = useState(0);
 
   const dicPosition = useSelector(
@@ -26,31 +27,45 @@ export default function Text() {
   useEffect(() => {
 
     if (isDictaphoneOn) {
-  
+
     } else {
-      dispatch(updateText({ text: "" }));
+      let letterSpacing = 0;
+      spansRef.current.forEach((span, index) => {
+        letterSpacing += 25;
+        const onComplete = () => {
+          spansRef.current.forEach((s) => {
+            if (s) {
+              s.style.opacity = "1";
+              s.style.transform = "none";
+              s.style.position = "static";
+            }
+          });
+          dispatch(updateText({ text: "" }));
+        };
+        animateSearch({ span, letterSpacing, index, totalTextWidth,
+           onComplete: index === spansRef.current.length - 1 ? onComplete : undefined });
+      })
     }
   }, [dicPosition]);
 
 
   useEffect(() => {
     let letterSpacing = 0;
-    if(text === TextResponse.Speak) {
-       spansRef.current.forEach((span, index) => {
-          letterSpacing += 25;
-          animate({span, letterSpacing, index, totalTextWidth})
-       })
+    if (text === TextResponse.Speak) {
+      spansRef.current.forEach((span, index) => {
+        letterSpacing += 25;
+        animate({ span, letterSpacing, index, totalTextWidth });
+      })
+
+    } else if (text === TextResponse.Search) {
+
+    } else if (text === TextResponse.None) {
       
-    } else if(text === TextResponse.Search) {
-
-
-    } else if(text === TextResponse.None) {
-
     } else {
-   
+
     }
 
-  },[text, totalTextWidth])
+  }, [text, totalTextWidth])
 
 
   useLayoutEffect(() => {
@@ -65,8 +80,8 @@ export default function Text() {
 
   return (
     <section className={`dictaphone__text-section`}>
-      <p>{text?.split("").map((chur:string,index) => {
-        return <span ref={ref => {spansRef.current[index] = ref}}  key={index}>{chur}</span>
+      <p>{text?.split("").map((chur: string, index) => {
+        return <span ref={ref => { spansRef.current[index] = ref }} key={index}>{chur}</span>
       })}</p>
     </section>
   );

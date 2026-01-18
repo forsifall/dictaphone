@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito, Ubuntu_Sans } from "next/font/google";
 import "@/app/styles/_globals.scss";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 
 const nunito = Nunito({
