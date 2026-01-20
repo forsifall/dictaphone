@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito, Ubuntu_Sans } from "next/font/google";
 import "@/app/styles/_globals.scss";
-import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import ReduxProvider from "@/app/store/ReduxProvider";
 
 
 const nunito = Nunito({
@@ -30,12 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} ${ubuntuSans.variable}`}>
-        <header className="main-header">
-          <h1>Диктофон</h1>
-        </header>
-        {children}
-        <footer className="main-footer">
-        </footer>
+        <ReduxProvider>
+          <header className="main-header">
+            <h1>Диктофон</h1>
+          </header>
+          {children}
+          <footer className="main-footer">
+          </footer>
+        </ReduxProvider>
       </body>
     </html>
   );
